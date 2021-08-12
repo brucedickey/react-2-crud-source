@@ -1,0 +1,17 @@
+
+To Do
+===============================================================================
+
+* Refresh the people table via AJAX fetch() w/o reloading the page.
+
+* Create the Display Profile modal.
+
+* Create the Delete Person modal.
+
+* Hook up the Display Profile, Update Person, and Delete Person functionality.
+
+* Write tests.
+
+* Provide nice UI/UX error handling for HTTP methods.
+
+* Eject from create-react-app.

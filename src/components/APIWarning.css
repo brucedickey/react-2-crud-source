@@ -1,0 +1,30 @@
+.api-warnings {
+  color: black;
+  background-color: rgb(223, 198, 130);
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: 10px auto 0px 30px;
+  width: 500px;
+  height: 100px;
+  line-height: 1.3rem;
+
+}
+.title-row {
+  margin-top: 7px;
+  margin-left: 15px;
+}
+.warning-icon-container {
+  display: inline-block;
+  position: relative;
+  top: -2px;
+}
+.warning-icon {
+  color: rgb(177, 95, 18);
+}
+.warning-title {
+  margin-left: 7px;
+}
+.api-warnings ul {
+  margin-top: 0px;
+  margin-left: 26px;
+}
