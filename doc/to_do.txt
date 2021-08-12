@@ -12,6 +12,8 @@ To Do
 
 * Write tests.
 
+* Run ESLint.
+
 * Provide nice UI/UX error handling for HTTP methods.
 
 * Eject from create-react-app.
