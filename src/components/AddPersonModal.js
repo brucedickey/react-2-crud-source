@@ -4,8 +4,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import './AddPersonModal.css';
 
 function AddPersonModal(props) {
+  // animation={false} to not run code that triggers a deprecation warining, per:
+  // https://stackoverflow.com/questions/60903335/warning-finddomnode-is-deprecated-in-strictmode-finddomnode-was-passed-an-inst
   return (
-    <Modal show={props.show} onHide={props.onCancel} animation={true}>
+    <Modal show={props.show} onHide={props.onCancel} animation={false}>
       <Modal.Header closeButton closeLabel=''>
         <Modal.Title>Add a person</Modal.Title>
       </Modal.Header>
