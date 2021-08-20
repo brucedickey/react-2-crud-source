@@ -5,7 +5,7 @@ import './UpdatePersonModal.css';
 
 function UpdatePersonModal(props) {
   return (
-    <Modal show={props.showProfile} onHide={props.onCancel} animation={true}>
+    <Modal show={props.showProfile} onHide={props.onCancel} animation={false}>
       <Modal.Header closeButton closeLabel=''>
         <Modal.Title>Update person</Modal.Title>
       </Modal.Header>
