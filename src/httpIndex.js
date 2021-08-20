@@ -1,9 +1,19 @@
 import {indexURL} from './urls.js';
 
-export const getPeople = async (onGetOk) => {
-  const response = await fetch(indexURL);
-  const jsonData = await response.json();
-  
-  const reversedListData = jsonData.reverse();      // Place new people on top
-  onGetOk(reversedListData);
-};
+const getPeople = (onGetOk) => {
+  const options = {
+    method:  'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  fetch(indexURL, options)
+    .then( (res) => res.json() )
+    .then( (data) => {
+        onGetOk(data);
+    }).catch( (err) => {
+        alert(err);
+    })
+}
+
+export default getPeople;
