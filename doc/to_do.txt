@@ -4,8 +4,6 @@ To Do
 
 * Fix bugs.
 
-* Refresh the people table via AJAX fetch() w/o reloading the page.
-
 * Create the Display Profile modal.
 
 * Create the Delete Person modal.
@@ -18,7 +16,7 @@ To Do
 
 * Provide nice UI/UX error handling for HTTP methods.
 
-* Eject from create-react-app.
+* Eject from create-react-app?
 
 
 BUGS:
@@ -26,15 +24,3 @@ BUGS:
 * After running build and deploy, the path to the icon on the header was 
   changed, removing the PUBLIC macro. Now the icon cannot be found at run
   time; it is in the img/ dir.
-
-* There is an infinite loop on the get index AJAX call.
-
-* index.js:1 Warning: Cannot update a component (`PeopleTable`) while 
-  rendering a different component (`PersonTableRow`). To locate the bad
-  setState() call inside `PersonTableRow`, follow the stack trace as 
-  described in https://reactjs.org/link/setstate-in-render
-
-
-
-
-
