@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState, useEffect} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,53 +7,53 @@ import Col from 'react-bootstrap/Col';
 //import DeletePersonModal from './DeletePersonModal.js';
 import Table from 'react-bootstrap/Table';
 import PersonTableRow from './PersonTableRow.js';
-import {getPeople} from '../httpIndex.js';
+import getPeople from '../httpIndex.js';
 import './PeopleTable.css';
 
-function PeopleTable(props) {
+const PeopleTable = (props) => {
+  const [personRows, setPersonRows] = useState([]);
+  
   const [showProfile, setShowProfile] = useState(false);
   //const onShowProfile = () => setShowProfile(true);
-
   const [showUpdate, setShowUpdate] = useState(false);
   //const onShowEdit = () => setShowEdit(true);
-
   const [showDelete, setShowDelete] = useState(false);
   //const onShowDelete = () => setShowDelete(true);
-
   // const onSubmitDisplay = () => {
   // }
-
   // const onSubmitUpdate = () => {
   // }
-
   // const onSubmitDelete = () => {
   // }
 
   useEffect(() => {
-     getPeople(onGetOk);
-  });
 
-  const onGetOk = (peopleList) => {
-    props.setPeopleList(peopleList);
-  }
 
-  let personRows = "";
-  if (props.peopleList) {
-    personRows = props.peopleList.map((person) => (
-      <PersonTableRow 
-        person={person} 
-        key={person.id} 
-        peopleList={props.peopleList} 
-        setPeopleList={props.setPeopleList} 
-        showProfile = {showProfile}
-        setShowProfile = {setShowProfile}
-        showUpdate = {showUpdate}
-        setShowUpdate = {setShowUpdate}
-        showDelete = {showDelete}
-        setShowDelete = {setShowDelete}
-      />
-    ))
-  }
+    const onGetOk = (origPeopleList) => {
+
+      if (origPeopleList) {
+        const people = origPeopleList.reverse();   // Place new people on top
+
+        let rows = people.map((person) => (
+          <PersonTableRow 
+            person={person} 
+            key={person.id} 
+            refreshTable={props.refreshTable}
+            showProfile = {showProfile}
+            setShowProfile = {setShowProfile}
+            showUpdate = {showUpdate}
+            setShowUpdate = {setShowUpdate}
+            showDelete = {showDelete}
+            setShowDelete = {setShowDelete}
+          />
+        ))
+        setPersonRows(rows);
+      }
+    };
+
+    getPeople(onGetOk);
+
+  }, [props.refreshTable, showDelete, showProfile, showUpdate]);
 
   return (
     <>
@@ -76,6 +77,7 @@ function PeopleTable(props) {
       </Row> 
     </>
   );
+  
   /*
       <DisplayPersonModal show={props.showProfile} onCancel={setShowProfile(false)} onSubmit={onSubmitDisplay} />
       <UpdatePersonModal  show={props.showUpdate}  onCancel={setShowUpdate(false)}  onSubmit={onSubmitUpdate} />

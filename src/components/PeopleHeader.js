@@ -37,18 +37,18 @@ function clearForm() {
   $('#add-email').val('');
 }
 
-function PeopleHeader() {
+function PeopleHeader(props) {
   const [show, setShow] = useState(false);
-  const onShow   = () => setShow(true);
 
-  const onCancel = () => {
+  const onShow = () => setShow(true);
+
+  const onClearClose = () => {
     clearForm();
     setShow(false);
   }
   
   const onCreateOk = () => {
-    // FIXME Hacky shortcut for the time being...
-    window.location.reload();
+    props.refreshTable();
   }
   
   const onSubmit = () => {
@@ -58,6 +58,7 @@ function PeopleHeader() {
 
     if (!validatePerson(firstName, lastName, email)) return false;
 
+    onClearClose();
     createPerson(firstName, lastName, email, onCreateOk);
   }
   
@@ -69,7 +70,7 @@ function PeopleHeader() {
           <Button variant="primary" id="add-btn" onClick={onShow}>Add a person</Button>
         </Col>
       </Row>
-      <AddPersonModal show={show} onCancel={onCancel} onSubmit={onSubmit} />
+      <AddPersonModal show={show} onCancel={onClearClose} onSubmit={onSubmit} />
     </>
   );
 }
