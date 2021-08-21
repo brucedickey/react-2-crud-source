@@ -2,15 +2,13 @@
 To Do
 ===============================================================================
 
-* Fix bugs.
-
 * Create the Display Profile modal.
 
 * Create the Delete Person modal.
 
 * Hook up the Display Profile, Update Person, and Delete Person functionality.
 
-* Write tests.
+* Write and run tests.
 
 * Run ESLint.
 
@@ -21,6 +19,4 @@ To Do
 
 BUGS:
 
-* After running build and deploy, the path to the icon on the header was 
-  changed, removing the PUBLIC macro. Now the icon cannot be found at run
-  time; it is in the img/ dir.
+* 
