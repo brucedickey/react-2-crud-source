@@ -2,15 +2,11 @@
   background-color: rgb(15, 60, 112);
   height: 84px;
 }
-.svg-container {
-  font-size: 32px;
-  width: 3.9em;
-  display: inline-block;
-}
 #title-icon {
   display: inline-block;
-  margin-top: 7px;
+  margin-top: 5px;
   margin-left: 50px;
+  width: 80px;
 }
 #title {
   position: relative;

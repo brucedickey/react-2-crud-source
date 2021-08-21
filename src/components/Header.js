@@ -1,5 +1,5 @@
 // Photo https://www.goodfreephotos.com/ (public domain)
-
+import chipmunk from './surprised-chipmunk.png';
 import './Header.css';
 
 function Header() {
@@ -8,9 +8,7 @@ function Header() {
       <div className="row">
         <div className="col-12">
           <div className="header-content">
-            <div className="svg-container">
-              <img id="title-icon" src="../../img/final28-surprised-chipmunk.svg" alt="App icon" />
-            </div>
+            <img id="title-icon" src={chipmunk} alt="App icon" />
             <span id="title">React 2 CRUD</span>
           </div>
         </div> 
