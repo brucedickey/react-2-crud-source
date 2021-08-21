@@ -1,4 +1,5 @@
-// Photo https://www.goodfreephotos.com/ (public domain)
+// Logo image is from https://www.goodfreephotos.com/. Image license is 
+// CC0 / Public Domain: http://creativecommons.org/licenses/publicdomain/.
 import chipmunk from './surprised-chipmunk.png';
 import './Header.css';
 
