@@ -28,7 +28,6 @@ const PeopleTable = (props) => {
 
   useEffect(() => {
 
-
     const onGetOk = (origPeopleList) => {
 
       if (origPeopleList) {
