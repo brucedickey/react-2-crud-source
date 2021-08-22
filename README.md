@@ -1,9 +1,8 @@
 # React 2 CRUD
 A small app to demo CRUD operations and React, using the 3rd-party API service mecallapi.com.
 
-## Status 2021-08-12: 
-Less than half-baked / not yet fully functional, there is some unused WIP code.
-GET/index and PUT/CREATE are implemented.
+## Status 2021-08-21: 
+Functional.
 A todo list is in the doc/ dir.
 
 ## Info:
