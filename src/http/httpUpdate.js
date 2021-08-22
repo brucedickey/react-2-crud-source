@@ -1,6 +1,6 @@
 import {avatarURL, updateURL} from './urls.js';
 
-export const updatePerson = (firstName, lastName, email, id, onUpdateOk) => {
+const updatePerson = (firstName, lastName, email, id, onUpdateOk) => {
   const person = {
     "id":       id,
     "fname":    firstName,
@@ -20,11 +20,11 @@ export const updatePerson = (firstName, lastName, email, id, onUpdateOk) => {
     .then(res => res.json())
     .then(res => {
       if (res.status === 'ok') {
-        //$("#update-person-modal .btn-close").click();
-        //getPeople();   // Data round trip; UI to show person updated
         onUpdateOk();
       } else {
         alert(res.message);
       }
     });
 }
+
+export default updatePerson;

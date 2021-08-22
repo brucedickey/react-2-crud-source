@@ -1,7 +1,6 @@
 import {deleteURL} from './urls.js';
 
-export const deletePerson = (id, onDeleteOk) => {
-  //const id     = $("#delete-modal-body span").data('id');
+const deletePerson = (id, onDeleteOk) => {
   const person = {
     "id": id
   };
@@ -16,11 +15,11 @@ export const deletePerson = (id, onDeleteOk) => {
     .then(res => res.json())
     .then(res => {
       if (res.status === 'ok') {
-        //$("#delete-person-modal .btn-close").click();
-        //getPeople();   // Data round trip; UI to show person deleted
         onDeleteOk();
       } else {
         alert(res.message);
       }
     });
 }
+
+export default deletePerson;

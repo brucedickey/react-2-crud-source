@@ -1,6 +1,6 @@
 import {avatarURL, createURL} from './urls.js';
 
-export const createPerson = (firstName, lastName, email, onCreateOk) => {
+const createPerson = (firstName, lastName, email, onCreateOk) => {
   const person = {
     "fname":    firstName,
     "lname":    lastName,
@@ -25,3 +25,5 @@ export const createPerson = (firstName, lastName, email, onCreateOk) => {
       }
     });
 }
+
+export default createPerson;

@@ -2,12 +2,6 @@
 To Do
 ===============================================================================
 
-* Create the Display Profile modal.
-
-* Create the Delete Person modal.
-
-* Hook up the Display Profile, Update Person, and Delete Person functionality.
-
 * Write and run tests.
 
 * Run ESLint.

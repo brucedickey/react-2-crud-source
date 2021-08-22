@@ -15,6 +15,7 @@ function APIWarning() {
           <li>Does not allow you to delete or update the first ten people.</li>
           <li>Resets the people list every ten minutes.</li>
           <li>Does not provide a token; all users share data.</li>
+          <li>Does not ensure unique IDs.</li>
         </ul>
       </div>
     </>

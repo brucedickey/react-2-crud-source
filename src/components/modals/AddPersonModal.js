@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import './AddPersonModal.css';
 
 function AddPersonModal(props) {
-  // animation={false} to not run code that triggers a deprecation warining, per:
+  // animation={false} to not run code that triggers a deprecation warining in Bootstrap, per:
   // https://stackoverflow.com/questions/60903335/warning-finddomnode-is-deprecated-in-strictmode-finddomnode-was-passed-an-inst
   return (
     <Modal show={props.show} onHide={props.onCancel} animation={false}>
