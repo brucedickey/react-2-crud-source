@@ -119,7 +119,8 @@ const App = () => {
                        showUpdateModal={showUpdateModal} showDeleteModal={showDeleteModal} />
         </div>
         <DisplayPersonModal person={person} show={showProfile} onCancel={hideProfileModal} />
-        <UpdatePersonModal person={person} show={showUpdate} onCancel={hideUpdateModal}  />
+        <UpdatePersonModal person={person} show={showUpdate} onCancel={hideUpdateModal} 
+                           onSubmit={onSubmitUpdate} />
         <DeletePersonModal person={person} show={showDelete} onCancel={hideDeleteModal} 
                            onSubmit={onSubmitDelete} />
       </Container>
