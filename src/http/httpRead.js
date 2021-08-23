@@ -1,4 +1,4 @@
-import {readURL} from './urls.js';
+import {readURL} from './urls';
 
 const readPerson = (id, onReadOk) => {
   fetch(readURL + `${id}`)

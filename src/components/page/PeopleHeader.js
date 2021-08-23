@@ -1,17 +1,16 @@
-import $ from 'jquery';
 import React, { useState } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import {validatePerson} from '../../utils/utils.js';
-import createPerson from '../../http/httpCreate.js';
-import AddPersonModal from '../modals/AddPersonModal.js';
+import {validatePerson} from '../../utils/utils';
+import createPerson from '../../http/httpCreate';
+import AddPersonModal from '../modals/AddPersonModal';
 import './PeopleHeader.css';
 
 function clearForm() {
-  $('#add-first-name').val('');
-  $('#add-last-name').val('');
-  $('#add-email').val('');
+  document.getElementById('add-first-name').value = '';
+  document.getElementById('add-last-name').value = '';
+  document.getElementById('add-email').value = '';
 }
 
 function PeopleHeader(props) {
@@ -29,9 +28,9 @@ function PeopleHeader(props) {
   }
   
   const onSubmit = () => {
-    const firstName = $('#add-first-name').val();
-    const lastName  = $('#add-last-name').val();
-    const email     = $('#add-email').val();
+    const firstName = document.getElementById('add-first-name').value;
+    const lastName  = document.getElementById('add-last-name').value;
+    const email     = document.getElementById('add-email').value;
 
     if (!validatePerson(firstName, lastName, email)) return false;
 

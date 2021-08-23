@@ -1,4 +1,4 @@
-import {avatarURL, createURL} from './urls.js';
+import {avatarURL, createURL} from './urls';
 
 const createPerson = (firstName, lastName, email, onCreateOk) => {
   const person = {

@@ -1,4 +1,4 @@
-import {deleteURL} from './urls.js';
+import {deleteURL} from './urls';
 
 const deletePerson = (id, onDeleteOk) => {
   const person = {

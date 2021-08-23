@@ -1,4 +1,4 @@
-import {indexURL} from './urls.js';
+import {indexURL} from './urls';
 
 const getPeople = (onGetOk) => {
   const options = {

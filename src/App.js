@@ -1,18 +1,17 @@
 
 import {useReducer, useState} from 'react';
 import Container from 'react-bootstrap/Container';
-import $ from 'jquery';
-import {validatePerson} from './utils/utils.js';
-import readPerson from './http/httpRead.js';
-import updatePerson from './http/httpUpdate.js';
-import deletePerson from './http/httpDelete.js';
-import DisplayPersonModal from './components/modals/DisplayPersonModal.js';
+import {validatePerson} from './utils/utils';
+import readPerson from './http/httpRead';
+import updatePerson from './http/httpUpdate';
+import deletePerson from './http/httpDelete';
+import DisplayPersonModal from './components/modals/DisplayPersonModal';
 import UpdatePersonModal from './components/modals/UpdatePersonModal';
-import DeletePersonModal from './components/modals/DeletePersonModal.js';
-import Header from './components/page/Header.js';
-import Footer from './components/page/Footer.js';
-import PeopleHeader from './components/page/PeopleHeader.js';
-import PeopleTable from './components/page/PeopleTable.js';
+import DeletePersonModal from './components/modals/DeletePersonModal';
+import Header from './components/page/Header';
+import Footer from './components/page/Footer';
+import PeopleHeader from './components/page/PeopleHeader';
+import PeopleTable from './components/page/PeopleTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -51,9 +50,9 @@ function App() {
     refreshTable();
   }
   const onSubmitUpdate = (person_id) => {
-    const firstName = $('#update-first-name').val();
-    const lastName  = $('#update-last-name').val();
-    const email     = $('#update-email').val();
+    const firstName = document.getElementById('update-first-name').value;
+    const lastName  = document.getElementById('update-last-name').value;
+    const email     = document.getElementById('update-email').value;
 
     if (!validatePerson(firstName, lastName, email)) return false;
 

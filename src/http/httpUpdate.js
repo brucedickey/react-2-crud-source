@@ -1,4 +1,4 @@
-import {avatarURL, updateURL} from './urls.js';
+import {avatarURL, updateURL} from './urls';
 
 const updatePerson = (firstName, lastName, email, id, onUpdateOk) => {
   const person = {
