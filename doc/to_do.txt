@@ -6,8 +6,6 @@ To Do
 
 * Add form validation feedback on the forms.
 
-* Provide nice UI/UX error handling for HTTP methods.
-
 * Eject from create-react-app?
 
 
