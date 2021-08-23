@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import { Eye, PencilSquare, TrashFill } from 'react-bootstrap-icons';
 import './PersonTableRow.css';
 
-function PersonTableRow(props) {
+const PersonTableRow = (props) => {
   const person = props.person;
 
   const onProfileModal = () => {

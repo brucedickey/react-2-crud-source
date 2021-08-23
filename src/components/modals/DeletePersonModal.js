@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 import './DeletePersonModal.css';
 
-function DeletePersonModal(props) {
+const DeletePersonModal = (props) => {
   const onSubmit = () => {
     props.onSubmit(props.person.id);
   };

@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 import './AddPersonModal.css';
 
-function AddPersonModal(props) {
+const AddPersonModal = (props) => {
   // animation={false} to not run code that triggers a deprecation warining in Bootstrap, per:
   // https://stackoverflow.com/questions/60903335/warning-finddomnode-is-deprecated-in-strictmode-finddomnode-was-passed-an-inst
   return (

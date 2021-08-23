@@ -2,7 +2,7 @@ import './Footer.css';
 import APIWarning from './APIWarning';
 import Copyright from './Copyright';
 
-function Footer() {
+const Footer = () => {
   return (
     <div className="footer">
       <APIWarning />

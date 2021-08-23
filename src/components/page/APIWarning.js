@@ -1,7 +1,7 @@
 import './APIWarning.css';
 import {ExclamationTriangleFill} from 'react-bootstrap-icons';
 
-function APIWarning() {
+const APIWarning = () => {
   return (
     <>
       <div className="api-warnings">

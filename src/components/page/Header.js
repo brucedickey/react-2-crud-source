@@ -3,7 +3,7 @@
 import chipmunk from './surprised-chipmunk.png';
 import './Header.css';
 
-function Header() {
+const Header = () => {
   return (
     <header>
       <div className="row">

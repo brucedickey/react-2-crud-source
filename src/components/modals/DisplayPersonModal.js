@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.css";
 import './DisplayPersonModal.css';
 
-function DisplayPersonModal(props) {
+const DisplayPersonModal = (props) => {
   return (
     <Modal show={props.show} onHide={props.onCancel} animation={false}>
       <Modal.Header closeButton closeLabel=''>
@@ -19,7 +19,7 @@ function DisplayPersonModal(props) {
         </div>  
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.onCancel}>Close</Button>
+        <Button variant="primary" onClick={props.onCancel}>Close</Button>
       </Modal.Footer>
     </Modal>
   );  

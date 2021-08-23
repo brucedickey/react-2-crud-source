@@ -7,13 +7,13 @@ import createPerson from '../../http/httpCreate';
 import AddPersonModal from '../modals/AddPersonModal';
 import './PeopleHeader.css';
 
-function clearForm() {
+const clearForm = () => {
   document.getElementById('add-first-name').value = '';
   document.getElementById('add-last-name').value = '';
   document.getElementById('add-email').value = '';
 }
 
-function PeopleHeader(props) {
+const PeopleHeader = (props) => {
   const [show, setShow] = useState(false);
 
   const onShow = () => setShow(true);

@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 import './UpdatePersonModal.css';
 
-function UpdatePersonModal(props) {
+const UpdatePersonModal = (props) => {
   const onSubmit = () => {
     props.onSubmit(props.person.id);
   };

@@ -15,7 +15,7 @@ import PeopleTable from './components/page/PeopleTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-function App() {
+const App = () => {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
 
   const refreshTable = () => {
