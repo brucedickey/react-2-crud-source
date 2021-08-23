@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import  {render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('Renders App component page', () => {
   render(<App />);
-  const linkElement = screen.getByText(/React 2 CRUD/);
+  const linkElement = screen.getByText(/Add a person/);
   expect(linkElement).toBeInTheDocument();
 });
