@@ -1,8 +1,9 @@
 import {deleteURL} from './urls';
 
-const deletePerson = (id, onDeleteOk) => {
+const deletePerson = (id, onDeleteOk, onDeleteWarning, onDeleteError) => {
   const person = {
     "id": id
+
   };
   const options = {
     method:  'DELETE',
@@ -12,13 +13,18 @@ const deletePerson = (id, onDeleteOk) => {
     }
   }
   fetch(deleteURL, options)
-    .then(res => res.json())
     .then(res => {
-      if (res.status === 'ok') {
-        onDeleteOk();
-      } else {
-        alert(res.message);
+      if (!res.ok) { throw res }
+      return res.json()
+    })
+    .then(res => {
+      if (res.status === 'error') {
+        onDeleteWarning(`${res.message}`);
       }
+      onDeleteOk();
+    })
+    .catch(err => { 
+      onDeleteError(`${err.status}; ${err.statusText}`);
     });
 }
 

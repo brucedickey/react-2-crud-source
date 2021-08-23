@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import AlertMsg from './AlertMsg';
 import PersonTableRow from './PersonTableRow';
 import getPeople from '../../http/httpIndex';
 import './PeopleTable.css';
@@ -10,10 +11,17 @@ import './PeopleTable.css';
 const PeopleTable = (props) => {
   const [personRows, setPersonRows] = useState([]);
 
+  const [alertMsg, setAlertMsg] = useState('');
+  const [alertMsgVariant, setAlertMsgVariant] = useState('');
+
+  const {refreshTable, showProfileModal, showUpdateModal, showDeleteModal} = props;
+
   useEffect(() => {
-
+    const onGetError = (message) => {
+      setAlertMsg(`FETCH PEOPLE -- Error ${message}; please try again later.`);
+      setAlertMsgVariant('danger');
+    }    
     const onGetOk = (origPeopleList) => {
-
       if (origPeopleList) {
         const people = origPeopleList.reverse();   // Place new people on top
 
@@ -21,21 +29,23 @@ const PeopleTable = (props) => {
           <PersonTableRow 
             person={person} 
             key={person.id} 
-            showProfileModal = {props.showProfileModal}
-            showUpdateModal = {props.showUpdateModal}
-            showDeleteModal = {props.showDeleteModal}
+            showProfileModal = {showProfileModal}
+            showUpdateModal = {showUpdateModal}
+            showDeleteModal = {showDeleteModal}
           />
         ))
         setPersonRows(rows);
       }
     };
 
-    getPeople(onGetOk);
+    setAlertMsg('');
+    getPeople(onGetOk, onGetError);
 
-  }, [props.refreshTable, props.showProfileModal, props.showUpdateModal, props.showDeleteModal]);
+  }, [refreshTable, showProfileModal, showUpdateModal, showDeleteModal]);
 
   return (
     <>
+      <AlertMsg message={alertMsg} variant={alertMsgVariant} />
       <Row> 
         <Col>
           <Table striped id="people-table">

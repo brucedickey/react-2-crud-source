@@ -1,6 +1,6 @@
 import {indexURL} from './urls';
 
-const getPeople = (onGetOk) => {
+const getPeople = (onGetOk, onGetError) => {
   const options = {
     method:  'GET',
     headers: {
@@ -8,12 +8,16 @@ const getPeople = (onGetOk) => {
     }
   };
   fetch(indexURL, options)
-    .then( (res) => res.json() )
-    .then( (data) => {
-        onGetOk(data);
-    }).catch( (err) => {
-        alert(err);
+    .then(res => {
+      if (!res.ok) { throw res }
+      return res.json()
     })
+    .then( (data) => {
+      onGetOk(data);    
+    })
+    .catch(err => { 
+      onGetError(`${err.status}; ${err.statusText}`);
+    });
 }
 
 export default getPeople;

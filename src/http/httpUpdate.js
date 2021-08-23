@@ -1,6 +1,6 @@
 import {avatarURL, updateURL} from './urls';
 
-const updatePerson = (firstName, lastName, email, id, onUpdateOk) => {
+const updatePerson = (firstName, lastName, email, id, onUpdateOk, onUpdateWarning, onUpdateError) => {
   const person = {
     "id":       id,
     "fname":    firstName,
@@ -17,13 +17,18 @@ const updatePerson = (firstName, lastName, email, id, onUpdateOk) => {
     }
   }
   fetch(updateURL, options)
-    .then(res => res.json())
     .then(res => {
-      if (res.status === 'ok') {
-        onUpdateOk();
-      } else {
-        alert(res.message);
+      if (!res.ok) { throw res }
+      return res.json()
+    })
+    .then(res => {
+      if (res.status === 'error') {
+        onUpdateWarning(`${res.message}`);
       }
+      onUpdateOk();
+    })
+    .catch(err => { 
+      onUpdateError(`${err.status}; ${err.statusText}`);
     });
 }
 
