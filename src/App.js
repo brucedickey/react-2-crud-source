@@ -7,7 +7,7 @@ import updatePerson from './http/httpUpdate';
 import deletePerson from './http/httpDelete';
 import AlertMsg from './components/page/AlertMsg';
 import DisplayPersonModal from './components/modals/DisplayPersonModal';
-import UpdatePersonModal from './components/modals/UpdatePersonModal';
+import PersonInfoModal from './components/modals/PersonInfoModal';
 import DeletePersonModal from './components/modals/DeletePersonModal';
 import Header from './components/page/Header';
 import Footer from './components/page/Footer';
@@ -71,9 +71,9 @@ const App = () => {
     refreshTable();
   }
   const onSubmitUpdate = (person_id) => {
-    const firstName = document.getElementById('update-first-name').value;
-    const lastName  = document.getElementById('update-last-name').value;
-    const email     = document.getElementById('update-email').value;
+    const firstName = document.getElementById('form-first-name').value;
+    const lastName  = document.getElementById('form-last-name').value;
+    const email     = document.getElementById('form-email').value;
 
     if (!validatePerson(firstName, lastName, email)) return false;
 
@@ -119,8 +119,10 @@ const App = () => {
                        showUpdateModal={showUpdateModal} showDeleteModal={showDeleteModal} />
         </div>
         <DisplayPersonModal person={person} show={showProfile} onCancel={hideProfileModal} />
-        <UpdatePersonModal person={person} show={showUpdate} onCancel={hideUpdateModal} 
-                           onSubmit={onSubmitUpdate} />
+        <PersonInfoModal person={person} show={showUpdate} onCancel={hideUpdateModal} 
+                         onSubmit={onSubmitUpdate} 
+                         title="Update person" submitBtnLabel="Update person" 
+                         defaults={ {"fname":person.fname, "lname":person.lname, "email":person.username} } />
         <DeletePersonModal person={person} show={showDelete} onCancel={hideDeleteModal} 
                            onSubmit={onSubmitDelete} />
       </Container>

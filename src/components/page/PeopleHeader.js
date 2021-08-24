@@ -5,14 +5,8 @@ import Row from 'react-bootstrap/Row';
 import AlertMsg from './AlertMsg';
 import {validatePerson} from '../../utils/utils';
 import createPerson from '../../http/httpCreate';
-import AddPersonModal from '../modals/AddPersonModal';
+import PersonInfoModal from '../modals/PersonInfoModal';
 import './PeopleHeader.css';
-
-const clearForm = () => {
-  document.getElementById('add-first-name').value = '';
-  document.getElementById('add-last-name').value = '';
-  document.getElementById('add-email').value = '';
-}
 
 const PeopleHeader = (props) => {
   const [show, setShow] = useState(false);
@@ -20,8 +14,7 @@ const PeopleHeader = (props) => {
     props.setAlertMsg('');
     setShow(true);
   }
-  const onClearClose = () => {
-    clearForm();
+  const onHide = () => {
     setShow(false);
   }
   const onCreateOk = () => {
@@ -35,14 +28,14 @@ const PeopleHeader = (props) => {
     props.setAlertMsg(`ADD PERSON -- Error ${message}; please try again later.`);
     props.setAlertMsgVariant('danger');
   }
-  const onSubmit = () => {
-    const firstName = document.getElementById('add-first-name').value;
-    const lastName  = document.getElementById('add-last-name').value;
-    const email     = document.getElementById('add-email').value;
+  const onSubmit = (person_id) => {
+    const firstName = document.getElementById('form-first-name').value;
+    const lastName  = document.getElementById('form-last-name').value;
+    const email     = document.getElementById('form-email').value;
 
     if (!validatePerson(firstName, lastName, email)) return false;
 
-    onClearClose();
+    setShow(false);
     createPerson(firstName, lastName, email, onCreateOk, onCreateWarning, onCreateError);
   }
   
@@ -55,7 +48,9 @@ const PeopleHeader = (props) => {
         </Col>
       </Row>
       <AlertMsg message={props.alertMsg} variant={props.alertMsgVariant} />
-      <AddPersonModal show={show} onCancel={onClearClose} onSubmit={onSubmit} />
+      <PersonInfoModal person={ {"id":null} } show={show} onCancel={onHide} onSubmit={onSubmit} 
+                       title="Add a person" submitBtnLabel="Add person" 
+                       defaults={ {"fname":"", "lname":"", "email":""} } />
     </>
   );
 }
