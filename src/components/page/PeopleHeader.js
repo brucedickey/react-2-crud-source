@@ -28,15 +28,11 @@ const PeopleHeader = (props) => {
     props.setAlertMsg(`ADD PERSON -- Error ${message}; please try again later.`);
     props.setAlertMsgVariant('danger');
   }
-  const onSubmit = (person_id) => {
-    const firstName = document.getElementById('form-first-name').value;
-    const lastName  = document.getElementById('form-last-name').value;
-    const email     = document.getElementById('form-email').value;
-
-    if (!validatePerson(firstName, lastName, email)) return false;
+  const onSubmit = (values) => {
+    if (!validatePerson(values.firstName, values.lastName, values.email)) return false;
 
     setShow(false);
-    createPerson(firstName, lastName, email, onCreateOk, onCreateWarning, onCreateError);
+    createPerson(values.firstName, values.lastName, values.email, onCreateOk, onCreateWarning, onCreateError);
   }
   
   return (

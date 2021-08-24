@@ -70,15 +70,12 @@ const App = () => {
   const onUpdateOk = () => {
     refreshTable();
   }
-  const onSubmitUpdate = (person_id) => {
-    const firstName = document.getElementById('form-first-name').value;
-    const lastName  = document.getElementById('form-last-name').value;
-    const email     = document.getElementById('form-email').value;
-
-    if (!validatePerson(firstName, lastName, email)) return false;
+  const onSubmitUpdate = (values) => {
+    if (!validatePerson(values.firstName, values.lastName, values.email)) return false;
 
     setShowUpdate(false);
-    updatePerson(firstName, lastName, email, person_id, onUpdateOk, onUpdateWarning, onUpdateError);
+    updatePerson(values.firstName, values.lastName, values.email, values.id, 
+                 onUpdateOk, onUpdateWarning, onUpdateError);
   }
 
   //=== Delete ===
