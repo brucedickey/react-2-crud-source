@@ -61,11 +61,11 @@ const App = () => {
   }
   const onUpdateError = (message) => {
     setAlertMsgVariant('danger');
-    setAlertMsg(`UPDATE PERSON -- Error ${message}; please try again later.`);
+    setAlertMsg(`UPDATE PROFILE -- Error ${message}; please try again later.`);
   }
   const onUpdateWarning = (message) => {
     setAlertMsgVariant('warning');
-    setAlertMsg(`UPDATE PERSON -- ${message}.`);
+    setAlertMsg(`UPDATE PROFILE -- ${message}.`);
   }
   const onUpdateOk = () => {
     refreshTable();
