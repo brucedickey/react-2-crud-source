@@ -1,7 +1,5 @@
-
 import {useReducer, useState} from 'react';
 import Container from 'react-bootstrap/Container';
-import {validatePerson} from './utils/utils';
 import readPerson from './http/httpRead';
 import updatePerson from './http/httpUpdate';
 import deletePerson from './http/httpDelete';
@@ -26,6 +24,7 @@ const App = () => {
   const [person, setPerson] = useState([]);
   const [alertMsg, setAlertMsg] = useState('');
   const [alertMsgVariant, setAlertMsgVariant] = useState('');
+  const [errors, setErrors] = useState({});
 
   //=== Read Profile ===
   const [showProfile, setShowProfile] = useState(false);
@@ -52,6 +51,7 @@ const App = () => {
   //=== Update ===
   const [showUpdate, setShowUpdate] = useState(false);
   const showUpdateModal = (person) => {
+    setErrors({});
     setAlertMsg('');
     setPerson(person);
     setShowUpdate(true);
@@ -71,8 +71,6 @@ const App = () => {
     refreshTable();
   }
   const onSubmitUpdate = (values) => {
-    if (!validatePerson(values.firstName, values.lastName, values.email)) return false;
-
     setShowUpdate(false);
     updatePerson(values.firstName, values.lastName, values.email, values.id, 
                  onUpdateOk, onUpdateWarning, onUpdateError);
@@ -117,7 +115,7 @@ const App = () => {
         </div>
         <DisplayPersonModal person={person} show={showProfile} onCancel={hideProfileModal} />
         <PersonInfoModal person={person} show={showUpdate} onCancel={hideUpdateModal} 
-                         onSubmit={onSubmitUpdate} 
+                         onSubmit={onSubmitUpdate} errors={errors} setErrors={setErrors}
                          title="Update person" submitBtnLabel="Update person" 
                          defaults={ {"fname":person.fname, "lname":person.lname, "email":person.username} } />
         <DeletePersonModal person={person} show={showDelete} onCancel={hideDeleteModal} 

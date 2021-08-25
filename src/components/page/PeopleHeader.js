@@ -3,14 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import AlertMsg from './AlertMsg';
-import {validatePerson} from '../../utils/utils';
 import createPerson from '../../http/httpCreate';
 import PersonInfoModal from '../modals/PersonInfoModal';
 import './PeopleHeader.css';
 
 const PeopleHeader = (props) => {
+  const [errors, setErrors] = useState({});
+
   const [show, setShow] = useState(false);
   const onShow = () => {
+    setErrors({});
     props.setAlertMsg('');
     setShow(true);
   }
@@ -29,8 +31,6 @@ const PeopleHeader = (props) => {
     props.setAlertMsgVariant('danger');
   }
   const onSubmit = (values) => {
-    if (!validatePerson(values.firstName, values.lastName, values.email)) return false;
-
     setShow(false);
     createPerson(values.firstName, values.lastName, values.email, onCreateOk, onCreateWarning, onCreateError);
   }
@@ -45,6 +45,7 @@ const PeopleHeader = (props) => {
       </Row>
       <AlertMsg message={props.alertMsg} variant={props.alertMsgVariant} />
       <PersonInfoModal person={ {"id":null} } show={show} onCancel={onHide} onSubmit={onSubmit} 
+                       errors={errors} setErrors={setErrors}
                        title="Add a person" submitBtnLabel="Add person" 
                        defaults={ {"fname":"", "lname":"", "email":""} } />
     </>
