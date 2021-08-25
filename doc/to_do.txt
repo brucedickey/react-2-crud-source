@@ -4,8 +4,6 @@ To Do
 
 * Write and run tests.
 
-* Add form validation feedback on the forms.
-
 * Eject from create-react-app?
 
 
