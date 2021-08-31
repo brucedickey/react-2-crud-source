@@ -24,7 +24,7 @@ const PeopleHeader = (props) => {
   }
   const onCreateWarning = (message) => {
     props.setAlertMsgVariant('warning');
-    props.setAlertMsg(`DELETE PERSON -- ${message}.`);
+    props.setAlertMsg(`ADD PERSON -- ${message}.`);
   }
   const onCreateError = (message) => {
     props.setAlertMsg(`ADD PERSON -- Error ${message}; please try again later.`);
