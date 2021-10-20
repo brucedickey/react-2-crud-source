@@ -1,6 +1,6 @@
 import './Footer.css';
-import APIWarning from './APIWarning';
-import Copyright from './Copyright';
+import APIWarning from '../content/APIWarning';
+import Copyright from '../content/Copyright';
 
 const Footer = () => {
   return (
