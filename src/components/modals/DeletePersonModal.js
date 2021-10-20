@@ -9,7 +9,7 @@ const DeletePersonModal = (props) => {
   };
 
   return (
-    <Modal show={props.show} onHide={props.onCancel} animation={false}>
+    <Modal show={props.show} onHide={props.onHide} animation={false}>
       <Modal.Header closeButton closeLabel=''>
         <Modal.Title>Delete person</Modal.Title>
       </Modal.Header>
@@ -17,7 +17,7 @@ const DeletePersonModal = (props) => {
         <p>Confirm that you want to delete {props.person.fname} {props.person.lname}. </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.onCancel}>Cancel</Button>
+        <Button variant="secondary" onClick={props.onHide}>Cancel</Button>
         <Button variant="primary" onClick={onSubmit}>Delete person</Button>
       </Modal.Footer>
     </Modal>

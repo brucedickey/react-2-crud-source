@@ -1,45 +1,27 @@
 import {useReducer, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import readPerson from './http/httpRead';
-import updatePerson from './http/httpUpdate';
 import deletePerson from './http/httpDelete';
-import AlertMsg from './components/page/AlertMsg';
+import AlertMsg from './components/content/AlertMsg';
 import DisplayPersonModal from './components/modals/DisplayPersonModal';
 import PersonInfoModal from './components/modals/PersonInfoModal';
 import DeletePersonModal from './components/modals/DeletePersonModal';
-import Header from './components/page/Header';
-import Footer from './components/page/Footer';
-import PeopleHeader from './components/page/PeopleHeader';
-import PeopleTable from './components/page/PeopleTable';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import PeopleHeader from './components/content/PeopleHeader';
+import PeopleTable from './components/content/PeopleTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 const App = () => {
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
-
-  const refreshTable = () => {
-    forceUpdate();
-  };
+  const [, refreshTable] = useReducer(x => x + 1, 0);
 
   const [person, setPerson] = useState([]);
   const [alertMsg, setAlertMsg] = useState('');
   const [alertMsgVariant, setAlertMsgVariant] = useState('');
-  const [errors, setErrors] = useState({});
 
   //=== Read Profile ===
   const [showProfile, setShowProfile] = useState(false);
-  const onReadError = (message) => {
-    setAlertMsgVariant('danger');
-    setAlertMsg(`READ PROFILE -- Error ${message}; please try again later.`);
-  }
-  const onReadWarning = (message) => {
-    setAlertMsgVariant('warning');
-    setAlertMsg(`READ PROFILE -- ${message}.`);
-  }
-  const onReadOk = (person) => {
-    setPerson(person);
-    setShowProfile(true);   
-  }
   const showProfileModal = (person) => {
     setAlertMsg('');
     readPerson(person.id, onReadOk, onReadWarning, onReadError);
@@ -48,32 +30,28 @@ const App = () => {
     setShowProfile(false);
   }
 
+  const onReadError = (message) => {
+    setAlertMsgVariant('danger');
+    setAlertMsg(`READ PROFILE -- Error ${message}; please try again later`);
+  }
+  const onReadWarning = (message) => {
+    setAlertMsgVariant('warning');
+    setAlertMsg(`READ PROFILE -- ${message}`);
+  }
+  const onReadOk = (person) => {
+    setPerson(person);
+    setShowProfile(true);
+  }
+ 
   //=== Update ===
   const [showUpdate, setShowUpdate] = useState(false);
   const showUpdateModal = (person) => {
-    setErrors({});
     setAlertMsg('');
     setPerson(person);
     setShowUpdate(true);
   }
   const hideUpdateModal = () => {
     setShowUpdate(false);
-  }
-  const onUpdateError = (message) => {
-    setAlertMsgVariant('danger');
-    setAlertMsg(`UPDATE PROFILE -- Error ${message}; please try again later.`);
-  }
-  const onUpdateWarning = (message) => {
-    setAlertMsgVariant('warning');
-    setAlertMsg(`UPDATE PROFILE -- ${message}.`);
-  }
-  const onUpdateOk = () => {
-    refreshTable();
-  }
-  const onSubmitUpdate = (values) => {
-    setShowUpdate(false);
-    updatePerson(values.firstName, values.lastName, values.email, values.id, 
-                 onUpdateOk, onUpdateWarning, onUpdateError);
   }
 
   //=== Delete ===
@@ -88,18 +66,15 @@ const App = () => {
   }
   const onDeleteError = (message) => {
     setAlertMsgVariant('danger');
-    setAlertMsg(`DELETE PERSON -- Error ${message}; please try again later.`);
+    setAlertMsg(`DELETE PERSON -- Error ${message}; please try again later`);
   }
   const onDeleteWarning = (message) => {
     setAlertMsgVariant('warning');
-    setAlertMsg(`DELETE PERSON -- ${message}.`);
-  }
-  const onDeleteOk = () => {
-    refreshTable();
+    setAlertMsg(`DELETE PERSON -- ${message}`);
   }
   const onSubmitDelete = (person_id) => {
     setShowDelete(false);
-    deletePerson(person_id, onDeleteOk, onDeleteWarning, onDeleteError);
+    deletePerson(person_id, refreshTable, onDeleteWarning, onDeleteError);
   }
 
   return (
@@ -113,13 +88,27 @@ const App = () => {
           <PeopleTable refreshTable={refreshTable} showProfileModal={showProfileModal} 
                        showUpdateModal={showUpdateModal} showDeleteModal={showDeleteModal} />
         </div>
-        <DisplayPersonModal person={person} show={showProfile} onCancel={hideProfileModal} />
-        <PersonInfoModal person={person} show={showUpdate} onCancel={hideUpdateModal} 
-                         onSubmit={onSubmitUpdate} errors={errors} setErrors={setErrors}
-                         title="Update person" submitBtnLabel="Update person" 
-                         defaults={ {"fname":person.fname, "lname":person.lname, "email":person.username} } />
-        <DeletePersonModal person={person} show={showDelete} onCancel={hideDeleteModal} 
-                           onSubmit={onSubmitDelete} />
+
+        {/* Bootstrap modals (below) fail to be added to React portals by ReactDOM.createPortal().
+            So not using portals for them; letting them do their own thing. 
+        */}
+
+        <DisplayPersonModal 
+           show={showProfile} person={person} 
+           onHide={hideProfileModal} refreshTable={refreshTable} 
+        />
+        <PersonInfoModal
+          show={showUpdate} type={'UPDATE PROFILE'}
+          title="Update person" submitBtnLabel="Update person" id={person.id} 
+          defaults={ {"fname":person.fname, "lname":person.lname, "email":person.username} } 
+          onHide={hideUpdateModal} refreshTable={refreshTable} 
+          setAlertMsgVariant={setAlertMsgVariant} setAlertMsg={setAlertMsg}
+        />
+        <DeletePersonModal 
+          show={showDelete} person={person} 
+          onHide={hideDeleteModal} refreshTable={refreshTable}
+          onSubmit={onSubmitDelete} 
+        />
       </Container>
       <Footer />
     </div>

@@ -6,7 +6,7 @@ import './DisplayPersonModal.css';
 
 const DisplayPersonModal = (props) => {
   return (
-    <Modal show={props.show} onHide={props.onCancel} animation={false}>
+    <Modal show={props.show} onHide={props.onHide} animation={false}>
       <Modal.Header closeButton closeLabel=''>
         <Modal.Title>Profile</Modal.Title>
       </Modal.Header>
@@ -19,7 +19,7 @@ const DisplayPersonModal = (props) => {
         </div>  
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={props.onCancel}>Close</Button>
+        <Button variant="primary" onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );  
