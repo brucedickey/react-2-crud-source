@@ -1,32 +1,23 @@
-#people-table {
+#peopleTable {
   width: 100%
 }
-#id-col {
+#idCol {
   width: 60px;
   font-weight: normal;
 }
-#firstname-col {
+#firstnameCol {
   width: auto;
   font-weight: normal;
 }
-#lastname-col {
+#lastnameCol {
   width: auto;
   font-weight: normal;
 }
-#email-col {
+#emailCol {
   width: auto;
   font-weight: normal;
 }
-#actions-col {
+#actionsCol {
   width: 110px;
   font-weight: normal;
-}
-#details-avatar-div {
-  clear: both;
-  width: 200px;
-  margin: auto;
-}
-#details-avatar {
-  width: 200px;
-  height: 200px;
 }

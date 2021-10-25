@@ -1,7 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
-import './DeletePersonModal.css';
 
 const DeletePersonModal = (props) => {
   const onSubmit = () => {

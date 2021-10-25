@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { Eye, PencilSquare, TrashFill } from 'react-bootstrap-icons';
-import './PersonTableRow.css';
+import css from './PersonTableRow.module.css';
 
 const PersonTableRow = (props) => {
   const person = props.person;
@@ -23,9 +23,9 @@ const PersonTableRow = (props) => {
       <td>{person.lname}</td>
       <td>{person.username}</td>
       <td>
-        <Button variant="primary" className="action-btn" title="Display profile" onClick={onProfileModal}><Eye />         </Button>
-        <Button variant="primary" className="action-btn" title="Update profile"  onClick={onUpdateModal} ><PencilSquare /></Button>
-        <Button variant="danger"  className="action-btn" title="Delete"          onClick={onDeleteModal} ><TrashFill />   </Button>
+        <Button variant="primary" className={css.actionBtn} title="Display profile" onClick={onProfileModal}><Eye />         </Button>
+        <Button variant="primary" className={css.actionBtn} title="Update profile"  onClick={onUpdateModal} ><PencilSquare /></Button>
+        <Button variant="danger"  className={css.actionBtn} title="Delete"          onClick={onDeleteModal} ><TrashFill />   </Button>
       </td>
     </tr>
   );

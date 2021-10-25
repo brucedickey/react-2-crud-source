@@ -1,19 +1,15 @@
-.id-badge {
+.idBadge {
   background-color:peru;
   color: black;
 }
-.profile-image {
+.profileImage {
   width: 465px;
   height: 465px;
 }
-.person-details {
+.personDetails {
   margin-top: 25px;
 }
-.person-name {
+.personName {
   font-weight: bold;
   font-size: 2rem;
-}
-button.close {
-  border: none;
-  background-color: transparent;
 }

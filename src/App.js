@@ -11,7 +11,7 @@ import Footer from './components/layout/Footer';
 import PeopleHeader from './components/content/PeopleHeader';
 import PeopleTable from './components/content/PeopleTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import css from './App.module.css';
 
 const App = () => {
   const [, refreshTable] = useReducer(x => x + 1, 0);
@@ -78,10 +78,10 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <Container fluid className="content">
+    <div className={css.App}>
+      <Container fluid className={css.content}>
         <Header />
-        <div className="container">
+        <div className={css.container}>
           <PeopleHeader refreshTable={refreshTable} 
                         setAlertMsg={setAlertMsg} setAlertMsgVariant={setAlertMsgVariant} />
           <AlertMsg message={alertMsg} variant={alertMsgVariant} />
@@ -99,7 +99,7 @@ const App = () => {
         />
         <PersonInfoModal
           show={showUpdate} type={'UPDATE PROFILE'}
-          title="Update person" submitBtnLabel="Update person" id={person.id} 
+          title="Update person" submitBtnLabel="Update person" personId={person.id} 
           defaults={ {"fname":person.fname, "lname":person.lname, "email":person.username} } 
           onHide={hideUpdateModal} refreshTable={refreshTable} 
           setAlertMsgVariant={setAlertMsgVariant} setAlertMsg={setAlertMsg}

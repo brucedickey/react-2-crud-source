@@ -1,13 +1,13 @@
-#people-header-row {
+#peopleHeaderRow {
   padding-top: 20px;
   height: 75px;
 }
-.content-title {
+.contentTitle {
   font-size: 2rem;
   color: rgb(28, 28, 51);
   display: inline-block;
 }
-#add-btn {
+#addBtn {
   margin-top: 7px;
   margin-right: 0px;
   float: right;

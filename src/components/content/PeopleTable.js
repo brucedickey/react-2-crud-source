@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import AlertMsg from './AlertMsg';
 import PersonTableRow from './PersonTableRow';
 import getPeople from '../../http/httpIndex';
-import './PeopleTable.css';
+import css from './PeopleTable.module.css';
 
 const PeopleTable = (props) => {
   const [personRows, setPersonRows] = useState([]);
@@ -18,7 +18,7 @@ const PeopleTable = (props) => {
 
   useEffect(() => {
     const onGetError = (message) => {
-      setAlertMsg(`FETCH PEOPLE -- Error ${message}; please try again later.`);
+      setAlertMsg(`FETCH PEOPLE -- Error ${message}; please try again later`);
       setAlertMsgVariant('danger');
     }    
     const onGetOk = (origPeopleList) => {
@@ -48,17 +48,17 @@ const PeopleTable = (props) => {
       <AlertMsg message={alertMsg} variant={alertMsgVariant} />
       <Row> 
         <Col>
-          <Table striped id="people-table">
+          <Table striped id={css.peopleTable}>
             <thead>
               <tr>
-                <th id="id-col">ID</th>
-                <th id="firstname-col">First Name</th>
-                <th id="lastname-col">Last Name</th>
-                <th id="email-col">Email</th>
-                <th id="actions-col">Actions</th>
+                <th id={css.idCol}>ID</th>
+                <th id={css.firstnameCol}>First Name</th>
+                <th id={css.lastnameCol}>Last Name</th>
+                <th id={css.emailCol}>Email</th>
+                <th id={css.actionsCol}>Actions</th>
               </tr>
             </thead>
-            <tbody id="people-table-body">
+            <tbody>
               {personRows}
             </tbody>
           </Table> 

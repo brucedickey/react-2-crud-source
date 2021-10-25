@@ -2,7 +2,7 @@ import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.css";
-import './DisplayPersonModal.css';
+import css from './DisplayPersonModal.module.css';
 
 const DisplayPersonModal = (props) => {
   return (
@@ -11,10 +11,10 @@ const DisplayPersonModal = (props) => {
         <Modal.Title>Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Badge className="id-badge"> ID: {props.person.id} </Badge>
-        <img src={props.person.avatar} className="profile-image" alt="Profile"></img>
-        <div className="text-center person-details">
-          <p className="person-name">{props.person.fname} {props.person.lname}</p>
+        <Badge className={css.idBadge}> ID: {props.person.id} </Badge>
+        <img src={props.person.avatar} className={css.profileImage} alt="Profile"></img>
+        <div className={`text-center ${css.personDetails}`}>
+          <p className={css.personName}>{props.person.fname} {props.person.lname}</p>
           <p>{props.person.username}</p>
         </div>  
       </Modal.Body>

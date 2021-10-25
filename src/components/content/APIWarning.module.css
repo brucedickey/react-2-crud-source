@@ -1,4 +1,4 @@
-.api-warnings {
+.apiWarnings {
   color: black;
   background-color: rgb(223, 198, 130);
   border: 2px solid white;
@@ -9,23 +9,23 @@
   line-height: 1.3rem;
   font-size: 12px;
 }
-.title-row {
+.titleRow {
   margin-top: 3px;
   margin-left: 15px;
 }
-.warning-icon-container {
+.warningIconContainer {
   display: inline-block;
   position: relative;
   top: -2px;
 }
-.warning-icon {
+.warningIcon {
   color: peru;
   font-size: 20px;
 }
-.warning-title {
+.warningTitle {
   margin-left: 7px;
 }
-.api-warnings ul {
+.apiWarnings ul {
   margin-top: 0px;
   margin-left: 27px;
   line-height: 16px;
