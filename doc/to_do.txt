@@ -9,4 +9,5 @@ To Do
 
 BUGS:
 
-* 
+* There are multiple renders of the table where only one is necesary.
+
