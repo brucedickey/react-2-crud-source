@@ -1,4 +1,5 @@
-import {useReducer, useState} from 'react';
+import React from 'react';
+import {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import readPerson from './http/httpRead';
 import deletePerson from './http/httpDelete';
@@ -10,17 +11,60 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import PeopleHeader from './components/content/PeopleHeader';
 import PeopleTable from './components/content/PeopleTable';
+import PersonTableRow from './components/content/PersonTableRow';
+import getPeople from './http/httpIndex';  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import css from './App.module.css';
 
 const App = () => {
-  const [, refreshTable] = useReducer(x => x + 1, 0);
-
-  const [person, setPerson] = useState([]);
   const [alertMsg, setAlertMsg] = useState('');
   const [alertMsgVariant, setAlertMsgVariant] = useState('');
 
+  const [personRows, setPersonRows] = useState([]);
+  const onGetError = (message) => {
+    setAlertMsg(`FETCH PEOPLE -- Error ${message}; please try again later`);
+    setAlertMsgVariant('danger');
+  }   
+  const onGetOk = (origPeopleList) => {
+    if (origPeopleList) {
+      const people = origPeopleList.reverse();   // Place new people on top
+
+      let rows = people.map((person) => (
+        <PersonTableRow 
+          person={person} 
+          key={person.id} 
+          showProfileModal = {showProfileModal}
+          showUpdateModal = {showUpdateModal}
+          showDeleteModal = {showDeleteModal}
+        />
+      ));
+      setPersonRows(rows);
+    }
+  };
+  const getCurrentPeople = () => {
+    setAlertMsg('');
+    getPeople(onGetOk, onGetError);
+  }
+ 
+  useEffect(() => {
+      getCurrentPeople()
+    }, 
+    // eslint-disable-next-line
+    []  // Run upon mounting only. Ignore pesky ESLint. 
+  );
+
+  //=== Create / Add ===
+  const [showAdd, setShowAdd] = useState(false);
+  const showAddModal = () => {
+    setAlertMsg('');
+    setShowAdd(true);
+  }
+  const hideAddModal = () => {
+    setShowAdd(false);
+  }
+
   //=== Read Profile ===
+  const [person, setPerson] = useState([]);
   const [showProfile, setShowProfile] = useState(false);
   const showProfileModal = (person) => {
     setAlertMsg('');
@@ -72,9 +116,12 @@ const App = () => {
     setAlertMsgVariant('warning');
     setAlertMsg(`DELETE PERSON -- ${message}`);
   }
+  const onDeleteOk = () => {
+    getCurrentPeople();
+  }
   const onSubmitDelete = (person_id) => {
     setShowDelete(false);
-    deletePerson(person_id, refreshTable, onDeleteWarning, onDeleteError);
+    deletePerson(person_id, onDeleteOk, onDeleteWarning, onDeleteError);
   }
 
   return (
@@ -82,31 +129,37 @@ const App = () => {
       <Container fluid className={css.content}>
         <Header />
         <div className={css.container}>
-          <PeopleHeader refreshTable={refreshTable} 
-                        setAlertMsg={setAlertMsg} setAlertMsgVariant={setAlertMsgVariant} />
+          <PeopleHeader showAddModal={showAddModal} />
           <AlertMsg message={alertMsg} variant={alertMsgVariant} />
-          <PeopleTable refreshTable={refreshTable} showProfileModal={showProfileModal} 
-                       showUpdateModal={showUpdateModal} showDeleteModal={showDeleteModal} />
+          <PeopleTable 
+            personRows={personRows}
+            showProfileModal={showProfileModal} 
+            showUpdateModal={showUpdateModal} 
+            showDeleteModal={showDeleteModal} 
+          />
         </div>
-
-        {/* Bootstrap modals (below) fail to be added to React portals by ReactDOM.createPortal().
-            So not using portals for them; letting them do their own thing. 
-        */}
 
         <DisplayPersonModal 
            show={showProfile} person={person} 
-           onHide={hideProfileModal} refreshTable={refreshTable} 
+           onHide={hideProfileModal}
         />
         <PersonInfoModal
           show={showUpdate} type={'UPDATE PROFILE'}
           title="Update person" submitBtnLabel="Update person" personId={person.id} 
           defaults={ {"fname":person.fname, "lname":person.lname, "email":person.username} } 
-          onHide={hideUpdateModal} refreshTable={refreshTable} 
-          setAlertMsgVariant={setAlertMsgVariant} setAlertMsg={setAlertMsg}
+          onHide={hideUpdateModal} getCurrentPeople={getCurrentPeople}
+          setAlertMsg={setAlertMsg} setAlertMsgVariant={setAlertMsgVariant}
+        />        
+        <PersonInfoModal
+          show={showAdd} type={'ADD PERSON'}
+          personId={null} title="Add a person" submitBtnLabel="Add person" 
+          defaults={ {"fname":"", "lname":"", "email":""} } 
+          onHide={hideAddModal} getCurrentPeople={getCurrentPeople}
+          setAlertMsg={setAlertMsg} setAlertMsgVariant={setAlertMsgVariant}
         />
         <DeletePersonModal 
           show={showDelete} person={person} 
-          onHide={hideDeleteModal} refreshTable={refreshTable}
+          onHide={hideDeleteModal}
           onSubmit={onSubmitDelete} 
         />
       </Container>

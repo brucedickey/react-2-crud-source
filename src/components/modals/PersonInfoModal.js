@@ -22,11 +22,14 @@ const PersonInfoModal = (props) => {
     props.setAlertMsgVariant('warning');
     props.setAlertMsg(`${props.type} -- ${message}`);
   }
-
+  const onHttpOk = (message) => {
+    props.onHide();
+    props.getCurrentPeople();
+  }
   const onSubmit = (event) => {
     event.preventDefault();
 
-    // We have the event so React refs are not needed.
+    // We have the event, so React refs are not needed.
     const firstName = event.target.form[0].value.trim();
     const lastName = event.target.form[1].value.trim();
     const email = event.target.form[2].value.trim();
@@ -37,10 +40,10 @@ const PersonInfoModal = (props) => {
     if (Object.keys(errorsMap).length === 0) {
       props.onHide();
       if (props.type === 'UPDATE PROFILE') {
-        updatePerson(firstName, lastName, email, props.personId, props.refreshTable, onHttpWarning, onHttpError);
+        updatePerson(firstName, lastName, email, props.personId, onHttpOk, onHttpWarning, onHttpError);
       } 
       else if (props.type === 'ADD PERSON') {
-        createPerson(firstName, lastName, email, props.refreshTable, onHttpWarning, onHttpError);
+        createPerson(firstName, lastName, email, onHttpOk, onHttpWarning, onHttpError);
       }
     }
   }

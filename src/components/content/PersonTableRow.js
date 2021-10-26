@@ -3,25 +3,23 @@ import { Eye, PencilSquare, TrashFill } from 'react-bootstrap-icons';
 import css from './PersonTableRow.module.css';
 
 const PersonTableRow = (props) => {
-  const person = props.person;
-
   const onProfileModal = () => {
-    props.showProfileModal(person)
+    props.showProfileModal(props.person)
   }
   const onUpdateModal = () => {
-    props.showUpdateModal(person)
+    props.showUpdateModal(props.person)
   }
   const onDeleteModal = () => {
-    props.showDeleteModal(person)
+    props.showDeleteModal(props.person)
   }
   
   // The mecallapi API index endpoint returns the email in the username field.
   return (
     <tr>
-      <td>{person.id}</td>
-      <td>{person.fname}</td>
-      <td>{person.lname}</td>
-      <td>{person.username}</td>
+      <td>{props.person.id}</td>
+      <td>{props.person.fname}</td>
+      <td>{props.person.lname}</td>
+      <td>{props.person.username}</td>
       <td>
         <Button variant="primary" className={css.actionBtn} title="Display profile" onClick={onProfileModal}><Eye />         </Button>
         <Button variant="primary" className={css.actionBtn} title="Update profile"  onClick={onUpdateModal} ><PencilSquare /></Button>
